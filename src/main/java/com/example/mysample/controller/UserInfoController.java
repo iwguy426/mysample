@@ -60,12 +60,11 @@ public class UserInfoController {
      * @return ユーザー編集画面
      */
     @GetMapping("/user/{id}/edit")
+    //パラメータエラー対応：@PathVariableに("id")を追加
     public String displayEdit(@PathVariable("id") Integer id, Model model) {
         UserInfo user = userInfoService.findById(id);
-        
         UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
         userUpdateRequest.setId(user.getId());
-        //userUpdateRequest.setId(user.getId());
         userUpdateRequest.setName(user.getName());
         userUpdateRequest.setPhone(user.getPhone());
         userUpdateRequest.setAddress(user.getAddress());
@@ -92,6 +91,7 @@ public class UserInfoController {
      * @return ユーザー情報一覧画面
      */
     @GetMapping("/user/{id}/delete")
+    //パラメータエラー対応：@PathVariableに("id")を追加
     public String delete(@PathVariable("id") Integer id, Model model) {
         // ユーザー情報の削除
         userInfoService.delete(id);
