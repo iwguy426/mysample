@@ -8,13 +8,13 @@ import lombok.Data;
  * ユーザー情報 検索用リクエストデータ
  */
 @Data
-public class UserSearchRequest implements Serializable {
+public class LoginRequest implements Serializable {
     /**
-     * 掲示板ID
+     * ユーザーID
      */
-    private Integer id;
+    private String userId;
     /**
-     * ユーザー名
+     * パスワード
      */
-    private String name;
+    private String password;
 }

@@ -137,4 +137,5 @@ public class UserInfoController {
         userInfoService.update(userUpdateRequest);
         return "redirect:/user/list";
     }
+    
 }
