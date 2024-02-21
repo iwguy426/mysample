@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head :: head_fragment(title = 'ユーザー情報一覧', scripts = ~{::script}, links = ~{::link})"></head>
+<head th:replace="~{common/head :: head_fragment(title = 'ユーザー情報一覧', scripts = ~{::script}, links = ~{::link})}"></head>
 <body>
     <div class="container">
         <h1>ユーザー情報一覧</h1>
         <div class="float-end">
-            <a th:href="@{/user/add}" class="btn btn-primary">新規登録はこちら</a>
+            <a th:href="@{/user/add}" class="btn btn-primary">新規登録</a>
         </div>
         <form th:action="@{/user/search}" th:object="${userSearchRequest}" th:method="post">
             <div class="form-group">
                 <label for="id">ID</label>
                 <input type="text" class="w-25 form-control" th:field="*{id}">
                 <label for="name">名前</label>
-                <input type="text" class="w-50 form-control" th:field="*{name}">
+                <input type="text" class="w-25 form-control" th:field="*{name}">
             </div><br />
             <button type="submit" class="btn btn-primary">検索</button>
         </form>
