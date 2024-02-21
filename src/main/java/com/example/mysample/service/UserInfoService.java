@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.mysample.dao.UserInfoMapper;
-import com.example.mysample.dto.LoginRequest;
 import com.example.mysample.dto.UserAddRequest;
 import com.example.mysample.dto.UserSearchRequest;
 import com.example.mysample.dto.UserUpdateRequest;
-import com.example.mysample.entity.Login;
 import com.example.mysample.entity.UserInfo;
 
 /**
@@ -67,11 +65,11 @@ public class UserInfoService {
         userInfoMapper.delete(id);
     }
     /**
-     * ログイン情報検索
-     * @param loginRequest リクエストデータ
+     * ログインユーザ情報検索
+     * @param name ログインユーザ
      * @return 検索結果
      */
-    public Login login(LoginRequest loginRequest) {
-        return userInfoMapper.login(loginRequest);
+    public List<UserInfo> nameSearch(String name) {
+        return userInfoMapper.nameSearch(name);
     }
 }
