@@ -42,7 +42,7 @@
         UPDATE userinfo SET delete_date = CURRENT_TIMESTAMP WHERE id = #{id}
     </update>
     <!--ログイン検索 -->
-    <select id="login" resultType="com.example.mysample.entity.Login">
-        SELECT * FROM logininfo WHERE user_id=#{userId} AND delete_date IS NULL
+    <select id="nameSearch" resultType="com.example.mysample.entity.UserInfo">
+        SELECT * FROM userinfo WHERE name=#{name} AND delete_date IS NULL
     </select>
 </mapper>

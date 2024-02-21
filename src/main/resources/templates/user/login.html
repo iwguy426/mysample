@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/head :: head_fragment(title = 'ユーザー情報一覧', scripts = ~{::script}, links = ~{::link})}"></head>
 <body>
-   <h2>ログイン画面</h2> 
+    <div class="container">
+        <!--/* ログインエラー時にメッセージを表示 */-->
+        <div th:if="${validationError}" th:each="error : ${validationError}">
+            <label class="text-danger" th:text="${error}"></label>
+        </div>
+        <h1 class="my-3">ログイン</h1>
+        <hr>
+        <form th:action="@{/user/login}" th:object="${userSearchRequest}" th:method="post">
+            <table class="table table-bordered col-md-6">
+            <tr class="form-group">
+                <th class="align-middle">名前</th>
+                <td><input type="text" class="form-controll" name="name"></td>
+            </tr>
+            <tr class="form-group">
+                <th class="align-middle">パスワード</th>
+                <td><input type="password" class="form-controll" name="password"></td>
+            </tr>
+            </table>
+            <div>
+                <input type="submit" class="btn btn-primary" value="ログイン">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

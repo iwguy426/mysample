@@ -48,4 +48,12 @@ public interface UserInfoMapper {
      * @param id ID
      */
     void delete(Integer id);
+    /**
+     * ログインユーザー情報検索
+     * @param name 検索用リクエストデータ
+     * @return 検索結果
+     */
+    List<UserInfo> nameSearch(String name);
+
+
 }

@@ -137,5 +137,29 @@ public class UserInfoController {
         userInfoService.update(userUpdateRequest);
         return "redirect:/user/list";
     }
+    //Added by SEO(2024/02/21)
+    /**
+     * ログイン画面を表示
+     * @param model Model
+     * @return ログイン画面
+     */
+    @GetMapping(value = "/login")
+    public String displayLogin(Model model) {
+        return "user/login";
+    }
+
+    /**
+     * ログインユーザの情報を表示
+     * @param model Model
+     * @return ユーザー情報一覧画面
+     */
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    public String searchUser(@ModelAttribute UserSearchRequest userSearchRequest, Model model) {
+        String name = userSearchRequest.getName();
+        List<UserInfo> nameList = userInfoService.nameSearch(name);
+        model.addAttribute("userlist", nameList);
+        //model.addAttribute("userSearchRequest", new UserSearchRequest());
+        return "user/search";
+    }
     
 }
