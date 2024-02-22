@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class UserSearchRequest implements Serializable {
     /**
-     * 掲示板ID
+     * ユーザID
      */
     private Integer id;
     /**

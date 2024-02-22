@@ -9,15 +9,15 @@
         </div>
         <h1 class="my-3">ログイン</h1>
         <hr>
-        <form th:action="@{/user/login}" th:object="${userSearchRequest}" th:method="post">
+        <form th:action="@{/user/login}" th:object="${userLoginRequest}" th:method="post">
             <table class="table table-bordered col-md-6">
             <tr class="form-group">
                 <th class="align-middle">名前</th>
-                <td><input type="text" class="form-controll" name="name"></td>
+                <td><input type="text" class="form-controll" th:field="*{name}"></td>
             </tr>
             <tr class="form-group">
                 <th class="align-middle">パスワード</th>
-                <td><input type="password" class="form-controll" name="password"></td>
+                <td><input type="password" class="form-controll" th:field="*{password}"></td>
             </tr>
             </table>
             <div>
