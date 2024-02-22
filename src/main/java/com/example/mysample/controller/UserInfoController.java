@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.mysample.dto.UserAddRequest;
+import com.example.mysample.dto.UserLoginRequest;
 import com.example.mysample.dto.UserSearchRequest;
 import com.example.mysample.dto.UserUpdateRequest;
 import com.example.mysample.entity.UserInfo;
@@ -66,6 +67,7 @@ public class UserInfoController {
         UserUpdateRequest userUpdateRequest = new UserUpdateRequest();
         userUpdateRequest.setId(user.getId());
         userUpdateRequest.setName(user.getName());
+        userUpdateRequest.setPassword(user.getPassword());
         userUpdateRequest.setPhone(user.getPhone());
         userUpdateRequest.setAddress(user.getAddress());
         model.addAttribute("userUpdateRequest", userUpdateRequest);
@@ -145,6 +147,7 @@ public class UserInfoController {
      */
     @GetMapping(value = "/login")
     public String displayLogin(Model model) {
+        model.addAttribute("userLoginRequest", new UserLoginRequest());
         return "user/login";
     }
 
@@ -154,12 +157,36 @@ public class UserInfoController {
      * @return ユーザー情報一覧画面
      */
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public String searchUser(@ModelAttribute UserSearchRequest userSearchRequest, Model model) {
-        String name = userSearchRequest.getName();
+    public String searchUser(@Validated @ModelAttribute UserLoginRequest userLoginRequest, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            // 入力チェックエラーの場合
+            List<String> errorList = new ArrayList<String>();
+            for (ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+            model.addAttribute("validationError", errorList);
+            return "user/login";
+        }
+        String name = userLoginRequest.getName();
         List<UserInfo> nameList = userInfoService.nameSearch(name);
+        UserSearchRequest userSearchRequest = new UserSearchRequest();
+        //userSearchRequest.setId("");
+        userSearchRequest.setName(name);
         model.addAttribute("userlist", nameList);
-        //model.addAttribute("userSearchRequest", new UserSearchRequest());
+        model.addAttribute("userSearchRequest", userSearchRequest);
         return "user/search";
     }
+    //Added by SEO(2024/02/22)
+    /**
+     * ログアウト処理
+     * @param model Model
+     * @return ログイン画面
+     */
+    @GetMapping(value = "/logout")
+    public String logout(Model model) {
+        model.addAttribute("userLoginRequest", new UserLoginRequest());
+        return "user/login";
+    }
+
     
 }

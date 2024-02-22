@@ -19,6 +19,10 @@ public class UserInfo implements Serializable {
      */
     private String name;
     /**
+     * パスワード
+     */
+    private String password;
+    /**
      * 住所
      */
     private String address;
